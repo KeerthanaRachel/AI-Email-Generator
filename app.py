@@ -6,9 +6,14 @@ from google import genai
 
 # Load API key
 load_dotenv()
+
 API_KEY = os.getenv("GEMINI_API_KEY")
 
-# Initialize Gemini client
+try:
+    API_KEY = st.secrets["GEMINI_API_KEY"]
+except Exception:
+    pass
+
 client = genai.Client(api_key=API_KEY) if API_KEY else None
 
 # Page configuration
